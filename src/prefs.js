@@ -53,7 +53,9 @@ const Creators = [
   { label: 'Bilal Elmoussaoui',
     url: 'https://github.com/bil-elmoussaoui' },
   { label: 'Alexander Rüedlinger',
-    url: 'https://github.com/lexruee' }
+    url: 'https://github.com/lexruee' },
+  { label: 'iczero',
+    url: 'https://github.com/iczero' }
 ];
 
 const Artists = [
