@@ -1,6 +1,6 @@
 {
   "name": "gnome-shell-extensions-mediaplayer",
-  "version": "0.1.0",
+  "version": "4.1.0",
   "description": "An extension for gnome-shell to display a media player control icon for dbus-compatible media players",
   "main": "index.js",
   "scripts": {
