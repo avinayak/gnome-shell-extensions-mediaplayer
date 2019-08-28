@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -xe
 
 # Possible arguments
 #./build --install
@@ -9,7 +10,7 @@
 
 BUILD_DIR="builddir"
 LOCAL_PREFIX="$HOME/.local"
-UUID="mediaplayer@patapon.info"
+UUID="mediaplayer@hellomouse.net"
 TMP_DIR="/tmp/share/gnome-shell/extensions/$UUID"
 
 build_type=$1
@@ -33,6 +34,11 @@ if [ -d "$PWD/$BUILD_DIR" ]; then
 fi
 
 function build {
+  npx webpack
+  pushd dist
+  cat extension-build.js extension-after.js > extension.js
+  cat prefs-build.js prefs-after.js > prefs.js
+  popd
   prefix=$1
   meson $BUILD_DIR --prefix=$prefix
   ninja -C $BUILD_DIR install

@@ -1,0 +1,25 @@
+{
+  "name": "gnome-shell-extensions-mediaplayer",
+  "version": "0.1.0",
+  "description": "An extension for gnome-shell to display a media player control icon for dbus-compatible media players",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellomouse/gnome-shell-extensions-mediaplayer.git"
+  },
+  "author": "JasonLG1979",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/hellomouse/gnome-shell-extensions-mediaplayer/issues"
+  },
+  "homepage": "https://github.com/hellomouse/gnome-shell-extensions-mediaplayer#readme",
+  "devDependencies": {
+    "@hellomouse/eslint-config": "^1.0.2",
+    "eslint": "^6.2.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  }
+}

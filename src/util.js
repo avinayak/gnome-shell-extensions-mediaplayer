@@ -1,7 +1,4 @@
 /* -*- mode: js2; js2-basic-offset: 4; indent-tabs-mode: nil -*- */
-/* jshint esnext: true */
-/* jshint -W097 */
-/* global imports: false */
 /**
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +14,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
+/* eslint-disable require-jsdoc */
+
 const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -24,9 +23,8 @@ const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tweener = imports.ui.tweener;
 
-
-function setCoverIconAsync(icon, coverUrl, fallback_icon_name, dontAnimate, delay) {
-  fallback_icon_name = (fallback_icon_name || 'audio-x-generic-symbolic');
+export function setCoverIconAsync(icon, coverUrl, fallbackIconName, dontAnimate, delay) {
+  fallbackIconName = (fallbackIconName || 'audio-x-generic-symbolic');
   if (coverUrl) {
     let file = Gio.File.new_for_uri(coverUrl);
     file.load_contents_async(null, function(source, result) {
@@ -36,47 +34,40 @@ function setCoverIconAsync(icon, coverUrl, fallback_icon_name, dontAnimate, dela
         if (!newIcon.equal(icon.gicon)) {
           if (dontAnimate) {
             icon.gicon = newIcon;
-          }
-          else if (delay) {
+          } else if (delay) {
             Mainloop.timeout_add(250, function() {
               animateChange(icon, 'gicon', newIcon);
               return false;
             });
-          }
-          else {
+          } else {
             animateChange(icon, 'gicon', newIcon);
           }
         }
-      }
-      catch(err) {
-        if (icon.icon_name != fallback_icon_name) {
+      } catch (err) {
+        if (icon.icon_name !== fallbackIconName) {
           if (dontAnimate) {
-            icon.icon_name = fallback_icon_name;
-          }
-          else if (delay) {
+            icon.icon_name = fallbackIconName;
+          } else if (delay) {
             Mainloop.timeout_add(250, function() {
-              animateChange(icon, 'icon_name', fallback_icon_name);
+              animateChange(icon, 'icon_name', fallbackIconName);
               return false;
             });
-          }
-          else {
-            animateChange(icon, 'icon_name', fallback_icon_name);
+          } else {
+            animateChange(icon, 'icon_name', fallbackIconName);
           }
         }
       }
     });
-  }
-  else if (icon.icon_name != fallback_icon_name) {
+  } else if (icon.icon_name !== fallbackIconName) {
     if (dontAnimate) {
-      icon.icon_name = fallback_icon_name;
-    }
-    else {
-      animateChange(icon, 'icon_name', fallback_icon_name);
+      icon.icon_name = fallbackIconName;
+    } else {
+      animateChange(icon, 'icon_name', fallbackIconName);
     }
   }
 }
 
-function animateChange(actor, prop, value) {
+export function animateChange(actor, prop, value) {
   Tweener.addTween(actor, {
     opacity: 0,
     time: 0.125,
@@ -90,13 +81,13 @@ function animateChange(actor, prop, value) {
   });
 }
 
-function getPlayerSymbolicIcon(desktopEntry, fallback) {
+export function getPlayerSymbolicIcon(desktopEntry, fallback) {
   if (desktopEntry) {
-    //The Player's symbolic Icon name *should* be it's
-    //Desktop Entry + '-symbolic'.
-    //For example, Pithos:
-    //Desktop Entry - 'io.github.Pithos'
-    //Symbolic Icon Name - 'io.github.Pithos-symbolic' 
+    // The Player's symbolic Icon name *should* be it's
+    // Desktop Entry + '-symbolic'.
+    // For example, Pithos:
+    // Desktop Entry - 'io.github.Pithos'
+    // Symbolic Icon Name - 'io.github.Pithos-symbolic'
     let possibleIconName = desktopEntry + '-symbolic';
     let currentIconTheme = Gtk.IconTheme.get_default();
     let IconExists = currentIconTheme.has_icon(possibleIconName);
@@ -107,53 +98,52 @@ function getPlayerSymbolicIcon(desktopEntry, fallback) {
   return fallback || 'audio-x-generic-symbolic';
 }
 
-function parseMetadata(metadata, state) {
+export function parseMetadata(metadata, state) {
   // Pragha sends a metadata dict with one value on stop
   if (!metadata || Object.keys(metadata).length < 2) {
     metadata = {};
   }
-  state.trackUrl = metadata["xesam:url"] ? metadata["xesam:url"].unpack() : "";
-  state.trackArtist = metadata["xesam:artist"] ? metadata["xesam:artist"].deep_unpack().join('/') : "";
-  state.trackArtist = metadata["rhythmbox:streamTitle"] ? metadata["rhythmbox:streamTitle"].unpack() : state.trackArtist;
-  state.trackAlbum = metadata["xesam:album"] ? metadata["xesam:album"].unpack() : "";
-  state.trackTitle = metadata["xesam:title"] ? metadata["xesam:title"].unpack() : "";
-  state.trackLength = metadata["mpris:length"] ? Math.round(metadata["mpris:length"].unpack() / 1000000) : 0;
-  state.trackObj = metadata["mpris:trackid"] ? metadata["mpris:trackid"].unpack() : "/org/mpris/MediaPlayer2/TrackList/NoTrack";
-  state.trackCoverUrl = metadata["mpris:artUrl"] ? metadata["mpris:artUrl"].unpack() : "";
-  state.trackRating = metadata["xesam:userRating"] ? parseInt(metadata["xesam:userRating"].unpack() * 5) : 'no rating';
-  state.trackRating = metadata["pithos:rating"] ? metadata["pithos:rating"].unpack() : state.trackRating;
-  state.isRhythmboxStream = metadata["rhythmbox:streamTitle"] ? true : false;
+  state.trackUrl = metadata['xesam:url'] ? metadata['xesam:url'].unpack() : '';
+  state.trackArtist = metadata['xesam:artist'] ? metadata['xesam:artist'].deep_unpack().join('/') : '';
+  state.trackArtist = metadata['rhythmbox:streamTitle'] ? metadata['rhythmbox:streamTitle'].unpack() : state.trackArtist;
+  state.trackAlbum = metadata['xesam:album'] ? metadata['xesam:album'].unpack() : '';
+  state.trackTitle = metadata['xesam:title'] ? metadata['xesam:title'].unpack() : '';
+  state.trackLength = metadata['mpris:length'] ? Math.round(metadata['mpris:length'].unpack() / 1000000) : 0;
+  state.trackObj = metadata['mpris:trackid'] ? metadata['mpris:trackid'].unpack() : '/org/mpris/MediaPlayer2/TrackList/NoTrack';
+  state.trackCoverUrl = metadata['mpris:artUrl'] ? metadata['mpris:artUrl'].unpack() : '';
+  state.trackRating = metadata['xesam:userRating'] ? parseInt(metadata['xesam:userRating'].unpack() * 5) : 'no rating';
+  state.trackRating = metadata['pithos:rating'] ? metadata['pithos:rating'].unpack() : state.trackRating;
+  state.isRhythmboxStream = metadata['rhythmbox:streamTitle'] ? true : false;
 }
 
-var compileTemplate = function(template, playerState) {
+export let compileTemplate = function(template, playerState) {
   let escapedText = template.replace(/{(\w+)\|?([^}]*)}/g, function(match, fieldName, appendText) {
-    let text = "";
-    if (playerState[fieldName] && playerState[fieldName].toString() !== "") {
+    let text = '';
+    if (playerState[fieldName] && playerState[fieldName].toString() !== '') {
       text = playerState[fieldName].toString() + appendText;
       text = GLib.markup_escape_text(text, -1);
     }
     return text;
   });
-  //Validate Pango markup.
+  // Validate Pango markup.
   try {
     let validMarkup = Pango.parse_markup(escapedText, -1, '')[0];
     if (!validMarkup) {
       escapedText = 'Invalid Syntax';
-    }        
-  }
-  catch(err) {
+    }
+  } catch (err) {
     escapedText = 'Invalid Syntax';
   }
   return escapedText;
 };
 
-var _extends = function(object1, object2) {
+export function _extends(object1, object2) {
   Object.getOwnPropertyNames(object2).forEach(function(name, index) {
     let desc = Object.getOwnPropertyDescriptor(object2, name);
-    if (! desc.writable)
+    if (! desc.writable) {
       Object.defineProperty(object1.prototype, name, desc);
-    else {
+    } else {
       object1.prototype[name] = object2[name];
     }
   });
-};
+}

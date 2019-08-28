@@ -8,7 +8,7 @@ PREFIX = environ.get('MESON_INSTALL_PREFIX', HOME)
 DATA_DIR = path.join(PREFIX, 'share')
 DEST_DIR = environ.get('DESTDIR', '')
 EXTENSION_DIR = path.join(DATA_DIR,
-                          "gnome-shell/extensions/mediaplayer@patapon.info")
+                          "gnome-shell/extensions/mediaplayer@hellomouse.net")
 
 if not DEST_DIR:
     print("Installing new Schemas")

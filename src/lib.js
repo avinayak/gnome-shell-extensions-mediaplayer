@@ -1,7 +1,4 @@
 /* -*- mode: js2; js2-basic-offset: 4; indent-tabs-mode: nil -*- */
-/* jshint esnext: true */
-/* jshint -W097 */
-/* global imports: false */
 /**
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,23 +18,38 @@ const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 
-function getSettings(extension) {
-    let schemaName = 'org.gnome.shell.extensions.mediaplayer';
-    let schemaDir = extension.dir.get_child('schemas').get_path();
-    let schemaSource = Gio.SettingsSchemaSource.new_from_directory(schemaDir,
-                           Gio.SettingsSchemaSource.get_default(),
-                           false);
-    let schema = schemaSource.lookup(schemaName, false);
+/**
+ * Get settings for extension
+ * @param {Extension} extension
+ * @return {Settings}
+ */
+export function getSettings(extension) {
+  let schemaName = 'org.gnome.shell.extensions.mediaplayer';
+  let schemaDir = extension.dir.get_child('schemas').get_path();
+  let schemaSource = Gio.SettingsSchemaSource.new_from_directory(
+    schemaDir,
+    Gio.SettingsSchemaSource.get_default(),
+    false
+  );
+  let schema = schemaSource.lookup(schemaName, false);
 
-    return new Gio.Settings({ settings_schema: schema });
+  return new Gio.Settings({ settings_schema: schema });
 }
 
-function initTranslations(extension) {
-    let localeDir = extension.dir.get_child('locale').get_path();
-    Gettext.bindtextdomain('gnome-shell-extensions-mediaplayer', localeDir);
+/**
+ * Initialize translations for extension
+ * @param {Extension} extension
+ */
+export function initTranslations(extension) {
+  let localeDir = extension.dir.get_child('locale').get_path();
+  Gettext.bindtextdomain('gnome-shell-extensions-mediaplayer', localeDir);
 }
 
-function addIcon(extension) {
-    let iconPath = extension.dir.get_path();
-    Gtk.IconTheme.get_default().append_search_path(iconPath);
+/**
+ * Load icons for this extension
+ * @param {Extension} extension
+ */
+export function addIcon(extension) {
+  let iconPath = extension.dir.get_path();
+  Gtk.IconTheme.get_default().append_search_path(iconPath);
 }

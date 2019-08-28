@@ -1,0 +1,5 @@
+# webpack build outputs
+extension-build.js
+prefs-build.js
+extension.js
+prefs.js

@@ -1,2 +1,3 @@
 builddir/
 *.zip
+node_modules

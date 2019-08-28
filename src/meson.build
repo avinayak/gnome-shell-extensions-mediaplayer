@@ -1,16 +1,6 @@
 install_data([
-    'dbus.js',
     'extension.js',
-    'lib.js',
-    'manager.js',
-    'panel.js',
-    'player.js',
-    'prefs.js',
-    'settings.js',
     'stylesheet.css',
-    'ui.js',
-    'util.js',
-    'widget.js',
     'metadata.json',
     'mpi-symbolic.svg'
   ],
