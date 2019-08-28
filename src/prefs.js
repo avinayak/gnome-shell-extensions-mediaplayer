@@ -626,15 +626,15 @@ const PrefsWidget = GObject.registerClass(class PrefsWidget extends Frame {
     this._notebook = new Notebook();
 
     this._indicatorPage = new NotebookPage(_('Indicator'));
-    this._notebook.append_page(this._indicatorPage);
+    this._notebook.appendPage(this._indicatorPage);
 
     this._playerControlsPage = new NotebookPage(_('Player Controls'));
-    this._notebook.append_page(this._playerControlsPage);
+    this._notebook.appendPage(this._playerControlsPage);
 
     this._visibleWidgetsPage = new NotebookPage(_('Visible Widgets'));
-    this._notebook.append_page(this._visibleWidgetsPage);
+    this._notebook.appendPage(this._visibleWidgetsPage);
 
-    this._notebook.append_page(new AboutPage());
+    this._notebook.appendPage(new AboutPage());
 
     this.pack_start(this._notebook, true, true, 0);
 
