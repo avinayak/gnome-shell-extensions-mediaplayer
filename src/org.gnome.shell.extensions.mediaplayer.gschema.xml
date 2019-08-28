@@ -87,7 +87,7 @@
     <key name="enable-scroll" type="b">
         <default>true</default>
         <summary>Enable Indicator scroll events</summary>
-        <description>Enables track changes on scrolling the Indicator.</description>
+        <description>Enables changing track or volume when scrolling the Indicator.</description>
     </key>
     <key name="hide-stockmpris" type="b">
         <default>false</default>
@@ -113,6 +113,11 @@
         <default>false</default>
         <summary>Show a Play Status Icon for each Player</summary>
         <description>Show a Play Status Icon for each Player.</description>
+    </key>
+    <key name="alternate-mouse-mode" type="b">
+        <default>false</default>
+        <summary>Use scroll wheel to change volume</summary>
+        <description>If your mouse has forward/back buttons, you can use those to change tracks instead of the scroll wheel.</description>
     </key>
   </schema>
 </schemalist>

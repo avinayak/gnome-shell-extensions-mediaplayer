@@ -43,6 +43,7 @@ export default {
   MEDIAPLAYER_HIDE_STOCK_MPRIS_KEY: 'hide-stockmpris',
   MEDIAPLAYER_KEEP_ACTIVE_OPEN_KEY: 'active-open',
   MEDIAPLAYER_PLAY_STATUS_ICON_KEY: 'playstatus',
+  MEDIAPLAYER_ALTERNATE_MOUSE_MODE: 'alternate-mouse-mode',
 
   MINOR_VERSION: parseInt(Config.PACKAGE_VERSION.split('.')[1]),
 

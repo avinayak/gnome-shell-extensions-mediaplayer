@@ -201,6 +201,12 @@ const Settings = {
     type: 'b',
     tab: 'i',
     label: _('Hide the built-in GNOME Shell MPRIS Controls')
+  },
+  'alternate-mouse-mode': {
+    type: 'b',
+    tab: 'i',
+    label: _('Use scroll wheel to change volume'),
+    help: _('If your mouse has forward/back buttons, you can use those to change tracks and use the scroll wheel to change volume instead')
   }
 };
 

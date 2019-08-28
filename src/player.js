@@ -689,14 +689,14 @@ export class MPRISPlayer {
     if (volume === null) {
       volume = 0.0;
     } else if (this.hasWrongVolumeScaling) {
-      volume = Math.pow(volume, 1 / 3);
+      volume = volume ** (1 / 3);
     }
     return volume;
   }
 
   set volume(volume) {
     if (this.hasWrongVolumeScaling) {
-      volume = Math.pow(volume, 3);
+      volume = volume ** 3;
     }
     this._mediaServerPlayer.Volume = volume;
   }

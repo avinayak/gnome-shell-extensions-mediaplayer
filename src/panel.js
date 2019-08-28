@@ -55,27 +55,50 @@ const IndicatorMixin = {
   },
 
   _onScrollEvent(actor, event) {
+    if (!this.manager.activePlayer) return;
     if (settings.gsettings.get_boolean(settings.MEDIAPLAYER_ENABLE_SCROLL_EVENTS_KEY)) {
-      switch (event.get_scroll_direction()) {
-        case Clutter.ScrollDirection.UP:
-          this.manager.activePlayer.next();
-          break;
-        case Clutter.ScrollDirection.DOWN:
-          this.manager.activePlayer.previous();
-          break;
+      if (settings.gsettings.get_boolean(settings.MEDIAPLAYER_ALTERNATE_MOUSE_MODE)) {
+        switch (event.get_scroll_direction()) {
+          case Clutter.ScrollDirection.UP:
+            // TODO: maybe make this a configuration option?
+            this.manager.activePlayer.volume += 0.05;
+            break;
+          case Clutter.ScrollDirection.DOWN:
+            this.manager.activePlayer.volume -= 0.05;
+            break;
+        }
+      } else {
+        switch (event.get_scroll_direction()) {
+          case Clutter.ScrollDirection.UP:
+            this.manager.activePlayer.next();
+            break;
+          case Clutter.ScrollDirection.DOWN:
+            this.manager.activePlayer.previous();
+            break;
+        }
       }
     }
   },
 
-  _onButtonEvent(actor, event) {
-    if (event.type() === Clutter.EventType.BUTTON_PRESS) {
-      let button = event.get_button();
-      if (button === 2 && this.manager.activePlayer) {
-        this.manager.activePlayer.playPause();
-        return Clutter.EVENT_STOP;
-      }
+  _onButtonEvent(_actor, event) {
+    let player = this.manager.activePlayer;
+    if (!player || event.type() !== Clutter.EventType.BUTTON_PRESS) {
+      return Clutter.EVENT_PROPAGATE;
     }
-    return Clutter.EVENT_PROPAGATE;
+    switch (event.get_button()) {
+      case 2: // scroll wheel push (usually)
+        player.playPause();
+        break;
+      case 8: // back button
+        player.previous();
+        break;
+      case 9: // forward button
+        player.next();
+        break;
+      default: // something we shouldn't be handling
+        return Clutter.EVENT_PROPAGATE;
+    }
+    return Clutter.EVENT_STOP;
   },
 
   _connectSignals() {
