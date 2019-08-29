@@ -23,8 +23,8 @@ import { AggregateMenuIndicator, PanelIndicator } from './panel.js';
 import settings from './settings.js';
 
 // global stuff
-let manager;
-let indicator;
+export let manager;
+export let indicator;
 let _stockMpris;
 let _stockMprisOldShouldShow;
 
