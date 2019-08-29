@@ -1,5 +1,5 @@
 /* -*- mode: js2; js2-basic-offset: 4; indent-tabs-mode: nil -*- */
-/**
+/*
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 2 of the License, or
@@ -12,7 +12,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-**/
+*/
 
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
@@ -20,8 +20,9 @@ const Gettext = imports.gettext;
 
 /**
  * Get settings for extension
- * @param {Extension} extension
- * @return {Settings}
+ *
+ * @param {*} extension
+ * @return {Gio.Settings}
  */
 export function getSettings(extension) {
   let schemaName = 'org.gnome.shell.extensions.mediaplayer';
@@ -38,7 +39,8 @@ export function getSettings(extension) {
 
 /**
  * Initialize translations for extension
- * @param {Extension} extension
+ *
+ * @param {*} extension
  */
 export function initTranslations(extension) {
   let localeDir = extension.dir.get_child('locale').get_path();
@@ -47,7 +49,8 @@ export function initTranslations(extension) {
 
 /**
  * Load icons for this extension
- * @param {Extension} extension
+ *
+ * @param {*} extension
  */
 export function addIcon(extension) {
   let iconPath = extension.dir.get_path();

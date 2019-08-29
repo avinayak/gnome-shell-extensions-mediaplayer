@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/hellomouse/gnome-shell-extensions-mediaplayer#readme",
   "devDependencies": {
-    "@hellomouse/eslint-config": "^1.0.2",
+    "@hellomouse/eslint-config": "^1.1.2",
     "eslint": "^6.2.2",
+    "eslint-plugin-jsdoc": "^15.8.3",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
-  }
+  },
+  "dependencies": {}
 }

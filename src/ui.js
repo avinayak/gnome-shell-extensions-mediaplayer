@@ -1,5 +1,5 @@
 /* -*- mode: js2; js2-basic-offset: 4; indent-tabs-mode: nil -*- */
-/**
+/*
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 2 of the License, or
@@ -12,11 +12,11 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-**/
+*/
 
 'use strict';
 
-/* eslint-disable require-jsdoc */
+/* eslint-disable jsdoc/require-jsdoc */
 
 // const Gio = imports.gi.Gio;
 // const Gtk = imports.gi.Gtk;
@@ -27,12 +27,20 @@ const Gettext = imports.gettext.domain('gnome-shell-extensions-mediaplayer');
 const _ = Gettext.gettext;
 
 // const Me = imports.misc.extensionUtils.getCurrentExtension();
-// i give up
 import * as Widget from './widget.js';
 import Settings from './settings.js';
 import { setCoverIconAsync, getPlayerSymbolicIcon } from './util.js';
 
+// type imports
+/** @typedef {import('./player.js').MPRISPlayer} MPRISPlayer */
+/** @typedef {import('./player.js').PlayerState} PlayerState */
+
 export default class PlayerUI extends Widget.PlayerMenu {
+  /**
+   * The constructor
+   *
+   * @param {MPRISPlayer} player Wrapped player
+   */
   constructor(player) {
     super('', true);
     this.hidePlayStatusIcon();
@@ -123,6 +131,7 @@ export default class PlayerUI extends Widget.PlayerMenu {
     }
   }
 
+  /** @return {PlayerState} */
   get state() {
     return this.player.state;
   }
