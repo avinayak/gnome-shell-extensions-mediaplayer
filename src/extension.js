@@ -30,6 +30,9 @@ export let indicator;
 let _stockMpris;
 let _stockMprisOldShouldShow;
 
+// expose webpack require
+export let require = __webpack_require__; // eslint-disable-line
+
 /** Extension init function */
 export function init() {
   initTranslations(Me);

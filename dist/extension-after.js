@@ -1,4 +1,4 @@
 /* eslint-disable */
-let init = extension.init;
-let enable = extension.enable;
-let disable = extension.disable;
+var init = extension.init;
+var enable = extension.enable;
+var disable = extension.disable;
